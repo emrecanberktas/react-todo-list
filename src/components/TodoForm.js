@@ -10,7 +10,7 @@ function TodoForm({ addTodo }) {
     setValue("");
   };
   return (
-    <div style={{ margin: "5%" }}>
+    <div>
       <form onSubmit={handleSubmit}>
         <Input
           placeholder="Don't forget to do ..."
@@ -18,7 +18,6 @@ function TodoForm({ addTodo }) {
           id="outlined-basic"
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          className="input"
         />
       </form>
     </div>

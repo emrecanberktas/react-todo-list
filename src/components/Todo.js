@@ -1,3 +1,4 @@
+import { DeleteIcon } from "@chakra-ui/icons";
 import { Checkbox } from "@chakra-ui/react";
 function Todo({ todo, index, completeTodo, removeTodo }) {
   return (
