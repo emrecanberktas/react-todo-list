@@ -46,6 +46,14 @@ function App() {
     setTodos(newTodos);
   };
 
+  // Update Todo
+  const updateTodo = (id, text) => {
+    const newTodos = [...todos];
+    const index = newTodos.findIndex((todo) => todo.id === id);
+    newTodos[index].text = text;
+    setTodos(newTodos);
+  };
+
   // Adding new todos to do list
   const addTodo = (text) => {
     const newTodos = [...todos, { text, id: uuidv4(), isCompleted: false }];
@@ -86,6 +94,7 @@ function App() {
             todo={todo}
             completeTodo={completeTodo}
             uncompleteTodo={uncompleteTodo}
+            updateTodo={updateTodo}
             removeTodo={() => removeTodo(todo.id)}
           />
         ))}
