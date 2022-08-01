@@ -7,12 +7,12 @@ import {
   PopoverContent,
   PopoverHeader,
   PopoverBody,
-  PopoverArrow,
   PopoverCloseButton,
   Button,
   Portal,
+  Text,
 } from "@chakra-ui/react";
-function Todo({ todo, index, completeTodo, removeTodo, updateTodo, onClose }) {
+function Todo({ todo, index, completeTodo, removeTodo, updateTodo }) {
   const initRef = React.useRef();
   return (
     <div>
@@ -22,7 +22,11 @@ function Todo({ todo, index, completeTodo, removeTodo, updateTodo, onClose }) {
       >
         {todo.text}
       </Checkbox>
-      <Popover closeOnBlur={false} placement="left" initialFocusRef={initRef}>
+      <Popover
+        closeOnBlur={false}
+        placement="right-end"
+        initialFocusRef={initRef}
+      >
         {({ isOpen, onClose }) => (
           <>
             <PopoverTrigger>
@@ -30,19 +34,31 @@ function Todo({ todo, index, completeTodo, removeTodo, updateTodo, onClose }) {
             </PopoverTrigger>
             <Portal>
               <PopoverContent>
-                <PopoverHeader>This is the header</PopoverHeader>
+                <PopoverHeader>
+                  Do you want to delete
+                  <Text as="samp"> {todo.text}</Text>
+                </PopoverHeader>
                 <PopoverCloseButton />
                 <PopoverBody>
-                  <Box>
-                    Hello. Nice to meet you! This is the body of the popover
-                  </Box>
                   <Button
-                    mt={4}
+                    sx={{ marginRight: "5px" }}
                     colorScheme="blue"
-                    onClick={onClose}
+                    onClick={() => {
+                      removeTodo(index);
+                      onClose();
+                    }}
                     ref={initRef}
                   >
-                    Close
+                    Yes
+                  </Button>
+                  <Button
+                    ref={initRef}
+                    colorScheme="red"
+                    onClick={() => {
+                      onClose();
+                    }}
+                  >
+                    No
                   </Button>
                 </PopoverBody>
               </PopoverContent>
@@ -50,6 +66,15 @@ function Todo({ todo, index, completeTodo, removeTodo, updateTodo, onClose }) {
           </>
         )}
       </Popover>
+      <EditIcon
+        w="15px"
+        h="15px"
+        marginLeft="5px"
+        onClick={() => {
+          // updateTodo();
+          console.log("tamam da niye ordasın");
+        }}
+      />
     </div>
   );
 }
