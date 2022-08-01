@@ -11,6 +11,8 @@ import {
   Heading,
   Box,
 } from "@chakra-ui/react";
+import { MoonIcon, SunIcon } from "@chakra-ui/icons";
+
 function App() {
   const [todos, setTodos] = useState([
     { id: uuidv4(), text: "Reading Todos", isCompleted: false },
@@ -68,7 +70,7 @@ function App() {
         </Box>
         <Spacer />
         <Button onClick={toggleColorMode} colorScheme="teal" m="10px">
-          Toggle {colorMode === "light" ? "Dark" : "Light"} Mode
+          {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
         </Button>
       </Flex>
       <Flex alignItems="center" justifyContent="center">

@@ -7,12 +7,10 @@ import {
   PopoverContent,
   PopoverHeader,
   PopoverBody,
-  PopoverFooter,
   PopoverArrow,
   PopoverCloseButton,
   Button,
   Portal,
-  useDisclosure,
 } from "@chakra-ui/react";
 function Todo({ todo, index, completeTodo, removeTodo, updateTodo, onClose }) {
   const initRef = React.useRef();
@@ -24,39 +22,33 @@ function Todo({ todo, index, completeTodo, removeTodo, updateTodo, onClose }) {
       >
         {todo.text}
       </Checkbox>
-      <Popover>
-        <PopoverTrigger>
-          <DeleteIcon />
-        </PopoverTrigger>
-        <Portal>
-          <PopoverContent>
-            <PopoverArrow />
-            <PopoverHeader>Do you want to delete</PopoverHeader>
-            <PopoverCloseButton />
-            <PopoverBody>
-              <Button
-                sx={{ marginRight: "5px" }}
-                onClick={() => {
-                  removeTodo(index);
-                  onClose();
-                }}
-                colorScheme="blue"
-              >
-                Yes
-              </Button>
-              <Button
-                ref={initRef}
-                colorScheme="red"
-                onClick={() => {
-                  onClose();
-                  console.log("tamamda niye ordasın");
-                }}
-              >
-                No
-              </Button>
-            </PopoverBody>
-          </PopoverContent>
-        </Portal>
+      <Popover closeOnBlur={false} placement="left" initialFocusRef={initRef}>
+        {({ isOpen, onClose }) => (
+          <>
+            <PopoverTrigger>
+              <DeleteIcon w="15px" h="15px" />
+            </PopoverTrigger>
+            <Portal>
+              <PopoverContent>
+                <PopoverHeader>This is the header</PopoverHeader>
+                <PopoverCloseButton />
+                <PopoverBody>
+                  <Box>
+                    Hello. Nice to meet you! This is the body of the popover
+                  </Box>
+                  <Button
+                    mt={4}
+                    colorScheme="blue"
+                    onClick={onClose}
+                    ref={initRef}
+                  >
+                    Close
+                  </Button>
+                </PopoverBody>
+              </PopoverContent>
+            </Portal>
+          </>
+        )}
       </Popover>
     </div>
   );
