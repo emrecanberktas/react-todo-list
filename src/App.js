@@ -19,6 +19,8 @@ function App() {
     { id: uuidv4(), text: "Create new Todos", isCompleted: false },
     { id: uuidv4(), text: "Update Todos", isCompleted: false },
   ]);
+  const [todoEditing, setTodoEditing] = useState(null);
+  const [editingText, setEditingText] = useState("");
 
   console.log(todos);
 
@@ -50,10 +52,7 @@ function App() {
 
   // Update Todo
   const updateTodo = (id, text) => {
-    const newTodos = [...todos];
-    const index = newTodos.findIndex((todo) => todo.id === id);
-    newTodos[index].text = text;
-    setTodos(newTodos);
+    setTodos((prev) => prev.map((item) => (item.id === id ? text : item)));
   };
 
   // Adding new todos to do list
@@ -79,14 +78,7 @@ function App() {
       <br></br>
       <Flex alignItems="center" justifyContent="center" flexDirection="column">
         <Box w="33%">
-          <TodoForm
-            addTodo={addTodo}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          />
+          <TodoForm addTodo={addTodo} />
         </Box>
         <br></br>
         {todos.map((todo, index) => (

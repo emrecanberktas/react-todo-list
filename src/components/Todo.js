@@ -11,9 +11,11 @@ import {
   Button,
   Portal,
   Text,
+  Input,
 } from "@chakra-ui/react";
 function Todo({ todo, index, completeTodo, removeTodo, updateTodo }) {
   const initRef = React.useRef();
+
   return (
     <div>
       <Checkbox
@@ -27,17 +29,17 @@ function Todo({ todo, index, completeTodo, removeTodo, updateTodo }) {
         placement="right-end"
         initialFocusRef={initRef}
       >
-        {({ isOpen, onClose }) => (
+        {({ onClose }) => (
           <>
             <PopoverTrigger>
               <DeleteIcon w="15px" h="15px" />
             </PopoverTrigger>
             <Portal>
               <PopoverContent>
-                <PopoverHeader>
-                  Do you want to delete
+                <PopoverHeader>Do you want to delete</PopoverHeader>
+                <PopoverBody>
                   <Text as="samp"> {todo.text}</Text>
-                </PopoverHeader>
+                </PopoverBody>
                 <PopoverCloseButton />
                 <PopoverBody>
                   <Button
@@ -66,15 +68,6 @@ function Todo({ todo, index, completeTodo, removeTodo, updateTodo }) {
           </>
         )}
       </Popover>
-      <EditIcon
-        w="15px"
-        h="15px"
-        marginLeft="5px"
-        onClick={() => {
-          // updateTodo();
-          console.log("tamam da niye ordasın");
-        }}
-      />
     </div>
   );
 }
